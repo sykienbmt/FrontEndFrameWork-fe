@@ -1,0 +1,108 @@
+.table-item-cart{
+
+}
+
+.table-item-cart .table-title{
+    background-color: #76A822;
+}
+
+.cart-page-container .show-list{
+    width: 100%;
+}
+
+.cart-page-container tr{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    padding: 8px 10px;
+}
+
+.cart-page-container th{
+    color: white;
+}
+
+.cart-page-container td{
+    padding: 15px;
+}
+
+.cart-page-container td svg:hover{
+    color: red;
+    cursor: pointer;
+}
+
+
+.cart-page-container td img{
+    width: 100px;
+    height: 100px;
+}
+
+
+.table-column , .table-column-2 ,.table-column-3,.table-column-4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-column-1{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.table-row-content{
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+.box-change-quantity{
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+}
+.box-change-quantity input{
+    padding: 10px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    width: 80px;
+}
+
+.box-change-quantity button{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    border:2px solid #76A822;
+    color: #76A822;
+}
+.box-change-quantity button:hover{
+    background-color: #76A822;
+    color: white;
+}
+
+.color-table-cart{
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.small-table-end{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.item-cart-info small{
+    margin-top: 5px;
+}
+
+.color-item-payment{
+    position: absolute;
+    left: -10px;
+    bottom: -5px;
+}

@@ -1,0 +1,37 @@
+.slider-container{
+    width: 100%;
+    background: url("https://demo.casethemes.net/organio/wp-content/uploads/2021/03/bg-section7.jpg");
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.slider-content{
+    width: 1200px;
+    margin: auto;
+}
+
+
+
+.slick-slide{
+    padding: 10px;
+    padding-bottom: 25px;
+}
+
+.best-seller-product,.best-seller-desc{
+    text-align: center;
+    max-width: 40%;
+    margin-top: 15px;
+}
+
+.best-seller-desc{
+    font-size: 35px;
+}
+
+.best-seller-title{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 15px;
+}

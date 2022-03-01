@@ -1,0 +1,197 @@
+.footer-container{
+    width: 100%;
+    background-image: url('https://demo.casethemes.net/organio/wp-content/uploads/2021/03/bg-footer-top.png');
+    padding-top: 10px;
+    margin-top: 30px;
+}
+
+/* section 1 */
+.section-1-mail-container{
+    width: 100%;
+}
+
+.section-1-mail{
+    width: 1200px;
+    margin: auto;
+    background-image: url("https://demo.casethemes.net/organio/wp-content/uploads/2021/03/bg-mailchimp.jpg");
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    padding: 40px;
+    border-radius: 100px;
+    position: relative;
+}
+
+.section-1-mail .send-mail-img{
+    position: absolute;
+    left: 3px;
+    bottom: -3px;
+}
+
+.section-1-mail .section-1-content{
+    max-width: 415px;
+    margin: 0 24% 0 auto;
+}
+.send-mail{
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.section-1-mail .section-1-content h2{
+    color: white;
+    font-size: 28px;
+    font-family: Lora;
+}
+
+.section-1-mail .section-1-content input{
+    color: white;
+    padding: 10px 0;
+    background:none;
+    border-bottom: 1px solid white;
+    font-family: Lora;
+    width: 80%;
+}
+
+.section-1-mail .section-1-content button{
+    height: 20%;
+    color: white;
+    padding: 10px 15px;
+    background:#377614;
+    font-family: Barlow;
+    font-weight: 700;
+    border-radius: 20px;
+}
+
+
+/* section 2 */
+
+.section-2-info-container{
+    width: 100%;
+}
+
+.section-2-info-container .section-2-info{
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    padding-top: 50px;
+    color: white;
+}
+
+.section-2-info-container .section-2-info h3{
+    font-size: 24px;
+    font-family: Lora;
+}
+
+.section-2-organico{
+    width: 30%;
+    padding: 15px 15px 0;
+}
+
+.section-2-link{
+    width: 22%;
+    padding: 15px 15px 0;
+}
+
+.section-2-official{
+    width: 22%;
+    padding: 15px 15px 0;
+}
+
+.section-2-instagram{
+    width: 26%;
+    padding: 15px 15px 0;
+}
+
+.section-2-organico .section-2-img img{
+    height: 56px;
+    width: 123px;
+}
+
+.section-2-organico p{
+    padding-right: 80px;
+    line-height: 27px;
+    margin-top: 20px;
+}
+
+.section-2-icon{
+    color: white;
+    margin-top: 20px;
+}
+
+.section-2-icon svg{ 
+    font-size: 18px;
+    margin-right: 10px;
+    transition: all .3s;
+}
+
+.section-2-icon svg:hover{ 
+    transform: translateY(-10%);
+}
+
+.section-2-link ul{
+    margin-top: 20px;
+}
+
+.section-2-link ul li{
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #f4ecec;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    transition: all .5s;
+}
+.section-2-link ul li:hover{
+    transform: translateX(3%);
+    text-decoration: underline;
+}
+
+.section-2-address{
+    margin-top: 15px;
+}
+
+.section-2-address ul li{
+    display: flex;
+    padding: 10px 0;
+    padding-right: 30px;
+}
+.section-2-address ul li svg{
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+.section-2-official h4{
+    color: #FF7800;
+    font-family: Lora;
+    font-size: 14px;
+}
+
+.section-2-official p{
+    margin-top: 5px;
+}
+
+
+.section-2-instagram .section-2-image{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 15px 0;
+    padding-right: 30px;
+}
+
+
+/* section 3 */
+.section-3-info{
+    width: 100%;
+    background-image: url('https://demo.casethemes.net/organio/wp-content/uploads/2021/03/bg-footer-bottom.png');
+}
+
+.section-3-content{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 90px 0 30px 0;
+    color: white;
+    font-weight: 500;
+}

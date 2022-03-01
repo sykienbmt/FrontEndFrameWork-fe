@@ -1,0 +1,143 @@
+.product-admin-manager{
+    width: 100%;
+}
+
+.form-admin-product{
+    width: 700px;
+    height:750px;
+    background-color: rgba(250 , 250, 250,1 );
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px 5px #77D499;
+}
+
+.form-admin-product #outlined-size-small{
+    margin-top: 10px;
+}
+
+.form-admin-product h2{
+    margin-bottom: 15px;
+}
+
+/* .form-admin-product .form-input-admin{
+    display: grid;
+    grid-gap:20px;
+    grid-template-columns: 1fr 1fr;
+} */
+
+.product-admin-container{
+    width: 100%;
+    height: 80%;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding:20px
+}
+
+.admin-pagination-product-container{
+    height: 10%;
+    padding: 10px;
+    padding-top: 25px;
+}
+
+
+
+/* item product admin */
+
+.product-admin-container .product-item-show{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    border-radius: 15px;
+}
+
+.product-item-show .icon-admin-edit{
+    position: absolute;
+    top:10px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.product-item-show .icon-admin-delete{
+    position: absolute;
+    top:10px;
+    left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.color-select-box{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+
+    border:1px solid #ddd
+}
+
+#demo-simple-select-label1{
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.search-product-admin-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 0 15px
+}
+
+#demo-simple-select-helper-label2{
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+
+
+/* You can remove these code below*/
+
+.simple-search-admin{
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+
+.simple-search-admin input{
+    padding: 7px 10px;
+    border: 2px solid #7de7a4;
+    border-radius: 15px;
+    width: 100%;
+    padding-right: 30px;
+}
+
+.simple-search-admin i{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 16px;
+    color: #77D499;
+}
+
+.simple-search-admin i:hover{
+    color: #4b8d63;
+}
+
+.simple-search-admin svg{
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+

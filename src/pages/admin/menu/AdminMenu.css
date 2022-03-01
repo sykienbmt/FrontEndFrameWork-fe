@@ -1,0 +1,33 @@
+.nav-admin-container{
+    width: 200px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .6);
+    padding: 20px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px 0 0 10px ;
+}
+
+.nav-admin-container .menu-item-lv1{
+    padding: 10px 20px;
+}
+
+
+.nav-admin-container .menu-admin-lv1{
+    margin-top: 25px;
+}
+
+.menu-info-admin{
+    display: flex;
+    align-items: center;
+}
+.nav-admin-container img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.nav-admin-container li{
+    cursor: pointer;
+}

@@ -1,0 +1,43 @@
+.best-seller-container{
+    width: 100%;
+    background-color: white;
+}
+
+.best-seller-container .best-seller{
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+    padding-bottom: 30px;
+}
+
+
+.slick-slide{
+    padding: 10px;
+    padding-bottom: 25px;
+}
+
+.best-seller-product,.best-seller-desc{
+    text-align: center;
+    max-width: 50%;
+    margin-top: 15px;
+}
+
+.best-seller-product{
+    font-size: 24px;
+    font-family: Architects Daughter;
+    color: #76a713;
+}
+
+.best-seller-desc{
+    font-size: 40px;
+    font-family: Lora;
+}
+
+.best-seller-title{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 15px;
+}

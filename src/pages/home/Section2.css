@@ -1,0 +1,11 @@
+.section-2-container h3{
+    font-size: 24px;
+    font-family: Lora;
+
+}
+
+.section-2-container p{
+    font-size: 16px;
+    font-family: Barlow;
+    color: #666;
+}

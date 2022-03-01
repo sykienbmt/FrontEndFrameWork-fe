@@ -1,0 +1,39 @@
+.err-404-container{
+    width: 100%;
+    text-align: center;
+    height: 100vh;
+}
+
+.err-404-content{
+    width: 1200px;
+    margin: auto;
+    padding-top: 50px;
+}
+
+.err-404-image img{
+    width: 50%;
+}
+
+.err-404-content h1{
+    font-size: 70px;
+    font-family: Lora;
+    margin-bottom: 25px;
+}
+
+.err-404-content p{
+    font-size: 27px;
+    font-family: Barlow;
+    color: #666666;
+    margin-bottom: 25px;
+}
+
+
+#button-404{
+    background-color: #76A822;
+    color: white;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 25px;
+    align-items: center;
+}

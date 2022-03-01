@@ -1,0 +1,49 @@
+.category-item-container{
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 335px;
+}
+
+
+.category-item-img{
+    height: 50%;
+    padding: 30px;
+    position: relative;
+}
+
+.category-item-img div{
+    z-index: 2;
+    position: absolute;
+    top:0;
+    left: 40px;
+    font-size: 110px;
+    font-weight: 700;
+}
+
+.category-item-img img{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    width: 70%; /* or any custom size */
+    height: 70%; 
+    object-fit: contain;
+    z-index: 3;
+}
+
+.category-content-desc{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.category-content-desc p{
+    text-align: center;
+}
+
+.category-item-container h3{
+    font-size: 24px;
+    font-family: Lora;
+}
