@@ -15,6 +15,7 @@ import { Color } from '../../../models/Color';
 import { weightController } from '../../../controllers/WeightController';
 import { colorController } from '../../../controllers/ColorController';
 import { MdClear } from "react-icons/md";
+import { UserContext } from '../../../contexts/UserContext';
 const { v4: uuid } = require('uuid');
 
 type State = {
@@ -33,6 +34,7 @@ type State = {
 
 export default function ProductAdmin() {
   const productLineContext=useContext(ProductLineContext)
+  const userContext = useContext(UserContext)
   const [state, setState] = useState<State>({
     isShowForm: false,
     pagination: { page: 1, perPage: 10, search: "", idCategory: "", select: "",from:0,to:1000},
@@ -98,10 +100,12 @@ export default function ProductAdmin() {
   }
 
   const deleteProductLine=(idProductLine:string)=>{
-    productController.deleteProductLine(idProductLine).then(()=>
-      console.log(123)
+    productController.deleteProductLine(idProductLine).then((res)=>
+      productController.list(state.pagination).then(res => {
+        setState({ ...state, totalPage: res.totalPage, productLines: res.productLines})
+      })
     )
-    loadProductLines()
+    userContext.setMess('Delete success !')
   }
 
   const changeSelectOption = (select:string)=>{

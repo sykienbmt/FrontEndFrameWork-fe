@@ -1,5 +1,6 @@
 .home-page-container{
     width: 100%;
+    overflow: hidden;
 }
 
 /*Section 1*/

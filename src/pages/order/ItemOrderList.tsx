@@ -27,7 +27,7 @@ export default function ItemOrderList(props:Props) {
                     <h3 className="order-shop-name">Shop Starr</h3>
                     <button className="order-shop-go btn">ViewShop</button>
                 </div>
-                <h4>Pending</h4>
+                <h4>{props.itemOrder.status}</h4>
                 <div className="order-information">
                     <div className="order-info-time">
                         <p>{props.itemOrder.closeAt}</p>

@@ -11,10 +11,15 @@ class OrderController{
         return data.data
     }
     
-    async list(page:number,perPage:number){
-        const data = await authAxios.post(backendUrl+'admin/orders',{page,perPage})
+    async list(page:number,perPage:number,search:string){
+        const data = await authAxios.post(backendUrl+'admin/orders',{page,perPage,search})
         console.log(data.data);
         
+        return data.data
+    }
+
+    async changeStatus(idOrder:string,status:string){
+        const data = await authAxios.post(backendUrl+'admin/orders/edit',{idOrder,status})
         return data.data
     }
 }

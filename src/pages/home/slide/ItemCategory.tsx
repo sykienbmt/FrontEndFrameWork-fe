@@ -28,9 +28,7 @@ export default function ItemCategory(props:Props) {
                 <div className="category-content-desc">
                     <h3 className="category-item-name">{props.cate.name}</h3>
                     <p className="category-item-desc">{props.cate.desc}</p>
-                    <Button variant="contained" size="small">
-                        Small
-                    </Button>
+                    <button className="button-effect" style={{background:"white",border:"2px solid green",color:"green"}}>Go now<i className="fas fa-arrow-right"></i></button>
                 </div>
         </Box>
 }

@@ -149,22 +149,30 @@ export default function FormAddEdit(props: Props) {
 
   const addNewProductOnUpdate = () => {
     const index = state.productLine.products.findIndex(x => x.idWeight === state.product.idWeight && x.idColor === state.product.idColor)
+    console.log(index);
+    
     let newProduct = { ...state.product }
     if (index < 0) {
       newProduct.idProduct = "";
       newProduct.idProductLine = state.productLine.idProductLine;
+      productController.updateProduct(newProduct).then(res => {
+        setState({ ...state, productLine: res })
+      })
+      props.loadProductLines()
       userContext.setMess("Add product successfully !")
     } else {
+      productController.updateProduct(newProduct).then(res => {
+        setState({ ...state, productLine: res })
+      })
+      props.loadProductLines()
       userContext.setMess("Update product successfully !")
     }
 
-    productController.updateProduct(newProduct).then(res => {
-      setState({ ...state, productLine: res })
-
-    })
-    props.loadProductLines()
+    
   }
 
+  console.log(state.product);
+  
 
   //update / add image
   const updateImage = () => {
@@ -193,10 +201,12 @@ export default function FormAddEdit(props: Props) {
 
   //update info productLine
   const updateProductLineInfo = () => {
+
     productController.updateProductLine(state.productLine).then(res => {
       props.loadProductLines()
       userContext.setMess("Update Product Line successfully !")
     })
+
   }
 
   const onClickAddProductLine = () => {
@@ -224,9 +234,9 @@ export default function FormAddEdit(props: Props) {
 
     if(state.isValid==true){
       productController.add(state.productLine).then(() => {
-        props.loadProductLines()
         userContext.setMess("Add Product Line successfully !")
       })
+      props.loadProductLines()
     }
   }
 

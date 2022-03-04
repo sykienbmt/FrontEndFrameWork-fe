@@ -9,12 +9,23 @@ import SectionBanner from './SectionBanner'
 import SimpleSlider from './SlideCategory'
 import SlideProduct from '../../components/slide/SlideProduct';
 import { WishListContext } from '../../contexts/WishListContext';
+import Slider from 'react-slick';
 
 export default function HomePage() {
-    
+    var settings = {
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        
+    };
+
     return (
         <div className='home-page-container'>
-            <SectionBanner />
+            <Slider {...settings}>
+                <SectionBanner />
+                <SectionBanner />
+            </Slider>
             <Section2 />
             <OrganicFood />
             <SimpleSlider />

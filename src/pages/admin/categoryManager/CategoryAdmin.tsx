@@ -1,23 +1,25 @@
 import { Box, Button, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { categoryController } from '../../../controllers/CategoryController'
 import { Category } from '../../../models/Category'
 import './CategoryAdmin.css'
 import { MdOutlineEditNote } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useStyles } from './style'
-
+import { UserContext } from '../../../contexts/UserContext'
 
 
 interface State{
     category: Category,
-    categories: Category[]
+    categories: Category[],
+    errValid:string
 }
 
 export default function CategoryAdmin() {
     const [state,setState] = useState<State>({
         category:{idCategory:"",desc:"",name:""},
-        categories:[]
+        categories:[],
+        errValid:""
     })
 
     useEffect(()=>{
@@ -26,9 +28,12 @@ export default function CategoryAdmin() {
         })
     },[])
 
+    const userContext = useContext(UserContext)
+
     const styles = useStyles()
 
     const [open, setOpen] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -44,13 +49,27 @@ export default function CategoryAdmin() {
     }
     
     const onClickAction=()=>{
-        categoryController.edit(state.category).then(()=>{
-            
-        })
+        if(state.category.name ==="" || state.category.desc===""){
+            setState(prev=>({...prev,errValid:"Pls refill all field"}))
+        }else{
+            setState(prev=>({...prev,errValid:""}))
+            if (state.category.idCategory===''){
+                userContext.setMess('Add Category done')
+            }else{
+                userContext.setMess('Edit Category done')
+            }
+            categoryController.edit(state.category).then(res=>{
+                setState(prev=>({...prev,categories:res}))
+            })
+        }
+
+        
     }
 
-    const onClickDelete=(id:String)=>{
-
+    const onClickDelete=(id:string)=>{
+        categoryController.delete(id).then(res=>{
+            setState(prev=>({...prev,categories:res}))
+        })
     }
 
     return (
@@ -97,7 +116,7 @@ export default function CategoryAdmin() {
                             <TableCell align="left">{row.desc}</TableCell>
                             <TableCell align="center">
                                 <MdOutlineEditNote className={styles.icon} onClick={()=>onClickSetEdit(row)}/>
-                                <RiDeleteBin6Line className={styles.icon}/>
+                                <RiDeleteBin6Line className={styles.icon} onClick={()=>onClickDelete(row.idCategory)}/>
                             </TableCell>
                             </TableRow>
                         ))}
@@ -123,6 +142,7 @@ export default function CategoryAdmin() {
                 <TextField fullWidth label="Category name" id="fullWidth" sx={{marginTop:"15px"}} 
                     value={state.category.name}
                     onChange={e=>setState(prev=>({...prev,category:{...prev.category,name:e.target.value}}))} 
+                    required
                 />
                 <TextField
                     id="outlined-multiline-static"
@@ -133,7 +153,19 @@ export default function CategoryAdmin() {
                     value={state.category.desc}
                     onChange={e=>setState(prev=>({...prev,category:{...prev.category,desc:e.target.value}}))} 
                     sx={{marginTop:"15px",marginBottom:"15px"}}
+                    required
                 />
+                {state.errValid !== "" ?
+                    <div style={{ position: 'relative', textAlign: 'center', width: '100%' }}>
+                        <span style={{
+                            position: 'absolute', color: 'red', width: '100%', fontSize: '14px'
+                            , transform: "translate(-50%,-50%)",
+                            top: '20px',
+                            background: 'white',
+                            fontWeight:"600"
+                        }}>{state.errValid}</span>
+                    </div> : ""
+                }
                 <Box sx={{textAlign:"right"}}>
                     <Button variant='outlined'
                         onClick={onClickAction}
@@ -143,7 +175,6 @@ export default function CategoryAdmin() {
                 </Box>
                 </Box>
             </Modal>
-
         </Box>
     )
 }
