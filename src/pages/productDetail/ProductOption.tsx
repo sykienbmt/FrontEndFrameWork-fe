@@ -190,7 +190,7 @@ export default function ProductOption(props: Props) {
                   }) : ""}
                </div>
                {/* Price total */}
-               <h2 className='price-now-detail'>$ {findPrice(state.product.idProduct)}</h2>
+               <h2 className='price-now-detail'>$ {findPrice(state.product.idProduct)*state.quantity}</h2>
 
                {/* Quantity select */}
                <div className="change-quantity-container">
@@ -216,7 +216,7 @@ export default function ProductOption(props: Props) {
                   </Button>
                </div>
 
-               <div className="wish-list-button">
+               {/* <div className="wish-list-button">
                   <Button variant="contained" sx={{
                      background: "white", size: "large"
                      , height: "45px"
@@ -232,7 +232,7 @@ export default function ProductOption(props: Props) {
                   }} startIcon={<CompareArrowsOutlinedIcon />}>
                      Compare to
                   </Button>
-               </div>
+               </div> */}
             </div>
          </div>
       </div>
