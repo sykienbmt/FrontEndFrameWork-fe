@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { categoryController } from '../../../controllers/CategoryController'
 import { Category } from '../../../models/Category'
@@ -7,19 +7,24 @@ import { MdOutlineEditNote } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useStyles } from './style'
 import { UserContext } from '../../../contexts/UserContext'
+import ReactPaginate from 'react-paginate'
 
 
 interface State{
     category: Category,
     categories: Category[],
-    errValid:string
+    errValid:string,
+    totalPage:number,
+    idDelete:string
 }
 
 export default function CategoryAdmin() {
     const [state,setState] = useState<State>({
         category:{idCategory:"",desc:"",name:""},
         categories:[],
-        errValid:""
+        errValid:"",
+        totalPage:1,
+        idDelete:""
     })
 
     useEffect(()=>{
@@ -67,10 +72,32 @@ export default function CategoryAdmin() {
     }
 
     const onClickDelete=(id:string)=>{
-        categoryController.delete(id).then(res=>{
+        handleClickOpen1()
+        setState(prev=>({...prev,idDelete:id}))
+    }
+
+    const onClickDelete1=()=>{
+        handleClose1()
+        categoryController.delete(state.idDelete).then(res=>{
             setState(prev=>({...prev,categories:res}))
         })
+        userContext.setMess('Delete Category done')
     }
+
+
+
+    const changePage = ({ selected }: any) => {
+    }
+
+    const [open1, setOpen1] = React.useState(false);
+
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+      };
+    
+    const handleClose1 = () => {
+        setOpen1(false);
+    };
 
     return (
         <Box className='category-admin-container'>
@@ -92,6 +119,7 @@ export default function CategoryAdmin() {
                         boxShadow: "0px 0px 10px 3px rgb(238, 234, 234)"}}>
                 List Category
 {/* Table */}
+                <Box sx={{height:"85%"}}>        
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -124,6 +152,21 @@ export default function CategoryAdmin() {
                         </TableBody>
                     </Table>
                     </TableContainer>
+                    </Box>
+
+                    <div className="admin-pagination-product-container" style={{height:"15%"}}>
+                    <ReactPaginate
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    pageCount={state.totalPage}
+                    onPageChange={changePage}
+                    containerClassName='paginationBtn'
+                    previousClassName='previousBtn'
+                    nextLinkClassName='nextBtn'
+                    disabledClassName='paginationDisable'
+                    activeClassName='paginationActive'
+                />
+                </div>
             </Box>
 
 
@@ -175,6 +218,28 @@ export default function CategoryAdmin() {
                 </Box>
                 </Box>
             </Modal>
+
+            <Dialog
+                open={open1}
+                onClose={handleClose1}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                {"Alert"}
+                </DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Are you sure to delete this Category ?
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={onClickDelete1}>Yes</Button>
+                <Button onClick={handleClose1} autoFocus>
+                    No
+                </Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     )
 }

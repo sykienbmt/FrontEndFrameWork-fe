@@ -7,12 +7,14 @@ import { Order, OrderInfo } from '../../../models/Order'
 import { FaClipboardList } from "react-icons/fa";
 import { useStyles } from './style'
 import { ItemCart } from '../../../models/OrderProduct'
+import ReactPaginate from 'react-paginate'
 
 interface State {
     order: OrderInfo,
     orders: OrderInfo[],
     search:string,
-    itemCarts:ItemCart[]
+    itemCarts:ItemCart[],
+    totalPage:number
 }
 
 
@@ -35,6 +37,7 @@ export default function OrderManage() {
             status: "",
             total: 0
         },
+        totalPage:1,
         orders: [],
         search:"",
         itemCarts:[]
@@ -72,6 +75,8 @@ export default function OrderManage() {
             setState(prev => ({ ...prev, orders: res.orderList }))
         })
     };
+    const changePage = ({ selected }: any) => {
+    }
 
     return (
         <Box className='category-admin-container'>
@@ -95,7 +100,8 @@ export default function OrderManage() {
                 boxShadow: "0px 0px 10px 3px rgb(238, 234, 234)"
             }}>
                 {/* Table */}
-                <TableContainer component={Paper}>
+                <Box sx={{height:"85%"}}>
+                <TableContainer component={Paper} >
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
@@ -144,7 +150,23 @@ export default function OrderManage() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                </Box>
+
+                <div className="admin-pagination-product-container" style={{height:"15%"}}>
+                    <ReactPaginate
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    pageCount={state.totalPage}
+                    onPageChange={changePage}
+                    containerClassName='paginationBtn'
+                    previousClassName='previousBtn'
+                    nextLinkClassName='nextBtn'
+                    disabledClassName='paginationDisable'
+                    activeClassName='paginationActive'
+                />
+                </div>
             </Box>
+            
 
 
             <Modal

@@ -17,7 +17,8 @@ interface ProductLineFunction{
     changeSearch:(name:string)=>void,
     changeCategory:(idCategory:string)=>void,
     changeRange:(range:number[])=>void,
-    changePerPage:(perPage:number)=>void
+    changePerPage:(perPage:number)=>void,
+    totalProduct:number
 }
 
 const defaultProductLineFunction:ProductLineFunction={
@@ -38,7 +39,8 @@ const defaultProductLineFunction:ProductLineFunction={
     changeSearch:()=>{},
     changeCategory:()=>{},
     changeRange:()=>{},
-    changePerPage:()=>{}
+    changePerPage:()=>{},
+    totalProduct:0
 }
 
 export const ProductLineContext=createContext<ProductLineFunction>(defaultProductLineFunction)
@@ -59,7 +61,7 @@ const ProductLineContextProvider = ({children}:Props)=>{
         //     })
         // }
         productController.list(state.pagination).then(res => {
-            setState({ ...state, totalPage: res.totalPage, productLines: res.productLines })
+            setState({ ...state, totalPage: res.totalPage, productLines: res.productLines,totalProduct:res.totalProduct })
         })
 
     }, [state.pagination])
@@ -94,6 +96,7 @@ const ProductLineContextProvider = ({children}:Props)=>{
         productLines:state.productLines,
         pagination:state.pagination,
         totalPage:state.totalPage,
+        totalProduct:state.totalProduct,
         changePage,
         changeSelectOption,
         changeSearch,

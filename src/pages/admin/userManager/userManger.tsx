@@ -1,23 +1,31 @@
-import { Box, Button, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
 import { MdOutlineEditNote } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useStyles } from '../categoryManager/style'
 import {User} from '../../../models/User'
 import { userController } from '../../../controllers/UserController'
+import ReactPaginate from 'react-paginate';
+import { UserContext } from '../../../contexts/UserContext';
 
 
 
 interface State{
     user: User,
-    users: User[]
+    users: User[],
+    totalPage:number,
+    idDelete:string
 }
 
 export default function UserManager() {
     const [state,setState] = useState<State>({
         user:{idUser:"",address:"",email:"",name:"",permission:"",phone:"",username:""},
-        users:[]
+        users:[],
+        totalPage:1,
+        idDelete:""
     })
+
+    const userContext = useContext(UserContext)
 
     useEffect(()=>{
         userController.list().then(res=>{
@@ -38,23 +46,42 @@ export default function UserManager() {
         handleOpen()
     }
 
-    const onClickEdit=(item:User)=>{
-        console.log(item);
+    const onClickEdit=(item:any)=>{
         setState(prev=>({...prev,user:item}))
         handleOpen()
     }
     
     const onClickAction=()=>{
-        console.log(state.user);
-        
+        handleOpen()
         userController.edit(state.user).then((res)=>{
             setState(prev=>({...prev,users:res}))
         })
     }
-
-    const onClickDelete=(id:String)=>{
-
+    const changePage = ({ selected }: any) => {
     }
+
+    const onClickDelete=(user:any)=>{     
+        setState(prev=>({...prev,idDelete:user.id_user}))
+        handleClickOpen1()
+    }
+
+    const onClickDelete1=()=>{
+        userController.delete(state.idDelete).then(res=>{
+            setState(prev=>({...prev,users:res}))
+        })
+        handleClose1()
+    }
+
+
+    const [open1, setOpen1] = React.useState(false);
+
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+      };
+    
+    const handleClose1 = () => {
+        setOpen1(false);
+    };
 
     return (
         <Box className='category-admin-container'>
@@ -75,6 +102,7 @@ export default function UserManager() {
                         borderRadius: "10px",
                         boxShadow: "0px 0px 10px 3px rgb(238, 234, 234)"}}>
 {/* Table */}
+                <Box sx={{height:"85%"}}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -89,8 +117,8 @@ export default function UserManager() {
                         </TableHead>
                         <TableBody>
 
-                        {state.users.length>0 && state.users.map((row) => (
-                            <TableRow key={row.idUser}
+                        {state.users.length>0 && state.users.map((row,index) => (
+                            <TableRow key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                             <TableCell component="th" scope="row"  >{row.username} </TableCell>
@@ -100,7 +128,7 @@ export default function UserManager() {
                             <TableCell align="left">{row.phone} </TableCell>
                             <TableCell align="center" >
                                 <MdOutlineEditNote className={styles.icon} onClick={()=>onClickEdit(row)}/>
-                                <RiDeleteBin6Line className={styles.icon}/>
+                                <RiDeleteBin6Line className={styles.icon} onClick={()=>onClickDelete(row)}/>
                             </TableCell>
                             </TableRow>
                         ))}
@@ -108,6 +136,21 @@ export default function UserManager() {
                         </TableBody>
                     </Table>
                     </TableContainer>
+                    </Box>
+
+                    <div className="admin-pagination-product-container" style={{height:"15%"}}>
+                    <ReactPaginate
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    pageCount={state.totalPage}
+                    onPageChange={changePage}
+                    containerClassName='paginationBtn'
+                    previousClassName='previousBtn'
+                    nextLinkClassName='nextBtn'
+                    disabledClassName='paginationDisable'
+                    activeClassName='paginationActive'
+                />
+                </div>
             </Box>
 
 
@@ -155,7 +198,29 @@ export default function UserManager() {
                 </Box>
                 </Box>
             </Modal>
-
+            
+            <Dialog
+                open={open1}
+                onClose={handleClose1}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                {"Alert"}
+                </DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Are you sure to delete this User ?
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={onClickDelete1}>Yes</Button>
+                <Button onClick={handleClose1} autoFocus>
+                    No
+                </Button>
+                </DialogActions>
+            </Dialog>
+                        
         </Box>
     )
 }

@@ -74,7 +74,8 @@ class ProductController{
         return authAxios.put(backendUrl+'product/list', pagination).then(res=>{
             let productLines:ProductLine[]=res.data.productLines
             let totalPage = Math.ceil(res.data.total/ pagination.perPage)
-            return {productLines,totalPage}
+            let totalProduct:number=res.data.total
+            return {productLines,totalPage,totalProduct}
         })
     }
 

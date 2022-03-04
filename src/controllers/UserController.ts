@@ -57,7 +57,12 @@ class UserController{
         })
     }
 
-
+    async delete(idUser:string){
+        console.log(idUser);
+        return authAxios.post(backendUrl+'users/delete',{idUser}).then(res=>{
+            return res.data
+        })
+    }
 }
 
 const parseJwt =(token:string)=> {

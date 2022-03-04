@@ -11,7 +11,7 @@ export default function LeftContent() {
   return (
     <div className="shop-left-container padding-container">
       <div className="shop-sort-container padding-container">
-        <p>Showing 1–12 of 45 results</p>
+        <p>Showing 1–9 of {productLineContext.totalProduct} product</p>
         <FormControl sx={{ m: 1, minWidth: 250 }}>
           <InputLabel id="demo-simple-select-helper-label">Sort by</InputLabel>
           <Select

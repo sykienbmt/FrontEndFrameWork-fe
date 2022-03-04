@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import { Pagination } from '../../../models/Pagination';
 import ReactPaginate from 'react-paginate'
@@ -29,7 +29,8 @@ type State = {
   category: Category,
   weights:Weight[],
   colors:Color[],
-  search:string
+  search:string,
+  idDelete:string
 }
 
 export default function ProductAdmin() {
@@ -54,7 +55,8 @@ export default function ProductAdmin() {
     category: { idCategory: "", desc: "", name: "" },
     weights:[],
     colors:[],
-    search:""
+    search:"",
+    idDelete:""
   })
 
   useEffect(() => {
@@ -100,13 +102,20 @@ export default function ProductAdmin() {
   }
 
   const deleteProductLine=(idProductLine:string)=>{
-    productController.deleteProductLine(idProductLine).then((res)=>
+    handleClickOpen()
+    setState(prev=>({...prev,idDelete:idProductLine}))
+  }
+
+  const deleteProductLine1=()=>{
+    handleClose()
+    productController.deleteProductLine(state.idDelete).then((res)=>
       productController.list(state.pagination).then(res => {
         setState({ ...state, totalPage: res.totalPage, productLines: res.productLines})
       })
     )
     userContext.setMess('Delete success !')
   }
+
 
   const changeSelectOption = (select:string)=>{
     setState(prev=>({...prev,pagination:({...prev.pagination,select:select})}))
@@ -124,9 +133,16 @@ export default function ProductAdmin() {
       setState({ ...state, pagination: { ...state.pagination, page: selected + 1 } })
   }
 
-  const changePerPage=(number:number)=>{
-      setState({ ...state, pagination: { ...state.pagination, perPage: number } })
-  }
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className='product-admin-manager'>
@@ -136,7 +152,7 @@ export default function ProductAdmin() {
           mt: "5px", boxShadow: "0px 0px 10px 3px rgb(238, 234, 234)", p: "10px", display: "flex", alignItems: "center",
           justifyContent: "space-between"
         }}>
-          <h3>All: 100</h3>
+          <h3>All: {productLineContext.totalProduct} product</h3>
 
 {/* Category */}
           <FormControl sx={{ width: "25%" }}>
@@ -257,6 +273,28 @@ export default function ProductAdmin() {
         weights={state.weights}
         colors={state.colors}
       /> : ""}
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Alert"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure to delete this product ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={deleteProductLine1}>Yes</Button>
+          <Button onClick={handleClose} autoFocus>
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
 
     </div>
   )
